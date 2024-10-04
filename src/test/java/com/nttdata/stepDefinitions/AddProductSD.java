@@ -28,7 +28,7 @@ public class AddProductSD {
         productSteps.addQuantityProduct(unidades);
     }
 
-    @Then("valido el carrito de compra actualice correctamente con las {int}")
+    @Then("valido el carrito de compra actualice correctamente con las unidades {int}")
     public void validoElCarritoDeCompraActualiceCorrectamenteConLas(int unidades) {
         productSteps.validateQuantityCart(unidades);
         productSteps.cartView();

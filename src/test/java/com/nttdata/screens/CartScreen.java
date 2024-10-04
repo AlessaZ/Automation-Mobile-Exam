@@ -3,6 +3,12 @@ package com.nttdata.screens;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static net.serenitybdd.core.Serenity.takeScreenshot;
 
 public class CartScreen extends PageObject {
 
@@ -20,10 +26,17 @@ public class CartScreen extends PageObject {
 
 
     public String getTitleCart() {
-        return this.titleCart.getText();
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(50));
+            wait.until(ExpectedConditions.visibilityOf(titleCart));
+            return this.titleCart.getText();
+        } catch (Exception e) {
+            takeScreenshot();
+            return null;
+        }
     }
 
-    public int getQuantityCart() {
+    public int getQuantityCartV() {
         return Integer.parseInt(this.quantityCart.getText());
     }
 

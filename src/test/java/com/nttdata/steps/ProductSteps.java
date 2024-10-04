@@ -29,7 +29,7 @@ public class ProductSteps {
     }
 
     public void validateQuantityCart(int quantity){
-        Assert.assertEquals("No es el valor correcto del carrito",addProductScreen.getQuantityCart(),String.valueOf(quantity));
+        Assert.assertEquals("No es el valor correcto del carrito",quantity,addProductScreen.getQuantityCart());
     }
 
     public void cartView(){
@@ -37,15 +37,15 @@ public class ProductSteps {
     }
 
     public void validateTitleCart(){
-        Assert.assertEquals("No cargó página Cart",cartScreen.getTitleCart(),"Cart");
+        Assert.assertEquals("No cargó página Cart","My Cart",cartScreen.getTitleCart());
     }
 
     public void validateQuantityCartV(int quantity){
-        Assert.assertEquals("No es el valor correcto del carrito",cartScreen.getQuantityCart(),quantity);
+        Assert.assertEquals("No es el valor correcto del carrito",quantity,cartScreen.getQuantityCartV());
     }
 
     public void validateTotalPriceCart(){
-        int quantity = cartScreen.getQuantityCart();
+        int quantity = cartScreen.getQuantityCartV();
         double price = cartScreen.getPriceUnitCart();
         double totalPriceExpected = quantity * price;
         double totalPrice = cartScreen.getPriceTotalCart();

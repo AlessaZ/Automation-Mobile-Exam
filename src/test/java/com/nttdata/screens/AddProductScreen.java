@@ -3,6 +3,12 @@ package com.nttdata.screens;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static net.serenitybdd.core.Serenity.takeScreenshot;
 
 public class AddProductScreen extends PageObject {
 
@@ -25,6 +31,8 @@ public class AddProductScreen extends PageObject {
     private WebElement quantityCart;
 
     public void typeQuantity(int quantityWanted) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(quantity));
         int currentQuantity = Integer.parseInt(quantity.getText());
 
         while (currentQuantity != quantityWanted) {
@@ -42,11 +50,20 @@ public class AddProductScreen extends PageObject {
         this.btnAddCart.click();
     }
 
-    public String getQuantityCart() {
-        return quantityCart.getText();
+    public int getQuantityCart() {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
+            wait.until(ExpectedConditions.visibilityOf(quantityCart));
+            return Integer.parseInt(this.quantityCart.getText());
+        } catch (Exception e) {
+            takeScreenshot();
+            return 0;
+        }
     }
 
     public void clickCart() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(ivCart));
         this.ivCart.click();
     }
 
